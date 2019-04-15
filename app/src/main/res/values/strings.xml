@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BookLogger</string>
+    <string name="add_title">Title</string>
+    <string name="add_author">Author</string>
+    <string name="add_pages">Pages</string>
+    <string name="add_days">Days To Read (optional)</string>
+    <string name="submit_book">Add Book</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
