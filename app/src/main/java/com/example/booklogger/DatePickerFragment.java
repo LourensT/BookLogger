@@ -17,6 +17,7 @@ public class DatePickerFragment extends DialogFragment
 
     int id;
     int page;
+    dateInterface callback;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -26,8 +27,14 @@ public class DatePickerFragment extends DialogFragment
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
+        callback = (dateInterface) getContext();
+
         // Create a new instance of DatePickerDialog and return it
         return new DatePickerDialog(getActivity(), this, year, month, day);
+    }
+
+    public interface dateInterface{
+        public void onDateSelected(String date, int id, int page);
     }
 
     public void setValues(int id, int page) {
@@ -36,9 +43,9 @@ public class DatePickerFragment extends DialogFragment
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        myDBHandler dbHandler = new myDBHandler(getContext(), null, null, 1);
         String fullDate = String.valueOf(year) + "-" + String.valueOf(month)+ '-' + String.valueOf(day);
-        dbHandler.addProgressString(id, fullDate, page);
+        callback.onDateSelected(fullDate, id, page);
+
 
     }
 }

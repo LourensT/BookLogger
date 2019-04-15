@@ -17,7 +17,7 @@ import com.example.sqltut.myDBHandler;
 
 
 
-public class EditBook extends AppCompatActivity {
+public class EditBook extends AppCompatActivity implements DatePickerFragment.dateInterface {
 
     private com.example.sqltut.myDBHandler dbHandler;
     private TextView titleText;
@@ -84,9 +84,14 @@ public class EditBook extends AppCompatActivity {
         });
     }
 
-    public void whenDateSet(){
+
+    public void onDateSelected(String date, int id, int page){
         //TODO make this activy refresh on dateSet
-        inputPage.setText("");
+        myDBHandler dbHandler = new myDBHandler(this, null, null, 1);
+        dbHandler.addProgressString(id, date, page);
+        finish();
+        startActivity(getIntent());
+        //inputPage.setText("");
     }
 
 }
