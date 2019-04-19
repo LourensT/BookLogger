@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 int dbid = position + 1;
+                Intent editIntent = new Intent(view.getContext(), EditTitle.class);
+                editIntent.putExtra("ID", dbid);
+                startActivity(editIntent);
                 return false;
             }
         });

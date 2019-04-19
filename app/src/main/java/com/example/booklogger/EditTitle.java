@@ -21,18 +21,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class AddTitle extends AppCompatActivity {
+public class EditTitle extends AppCompatActivity {
 
     private EditText inputTitle;
     private EditText inputAuthor;
     private EditText inputPages;
     private EditText inputDays;
-    private TextView pagesPerPage;
     private Button submitButton;
     private Button setLogoButton;
     private com.example.sqltut.myDBHandler dbHandler;
     private final int REQUEST_IMAGE_CAPTURE = 1;
     private String logoPath = "Not Set";
+    private int currentBookId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,24 +40,26 @@ public class AddTitle extends AppCompatActivity {
         setContentView(R.layout.activity_add_title);
 
         dbHandler = new myDBHandler(this, null, null, 1);
-
         inputTitle = findViewById(R.id.inputTitle);
         inputAuthor = findViewById(R.id.inputAuthor);
         inputPages = findViewById(R.id.inputPages);
         inputDays = findViewById(R.id.inputDays);
-        pagesPerPage = findViewById(R.id.pagesPerDay);
         submitButton = findViewById(R.id.addBookButton);
         setLogoButton = findViewById(R.id.addLogoButton);
 
-        inputDays.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                float pagesPerDay = Float.valueOf(inputPages.getText().toString()) / Float.valueOf(inputDays.getText().toString());
-                String dailyReading =  String.valueOf(pagesPerDay) + " Pages a Day";
-                pagesPerPage.setText(dailyReading);
 
-            }
-        });
+        Intent receivedIntent = getIntent();
+        Bundle b = receivedIntent.getExtras();
+        currentBookId = b.getInt("ID");
+
+        Book oldBook = dbHandler.getBook(currentBookId);
+        inputTitle.setText(oldBook.getTitle());
+        inputAuthor.setText(oldBook.getAuthor());
+        inputPages.setText(String.valueOf(oldBook.getPages()));
+        inputDays.setText(String.valueOf(oldBook.getDays()));
+        logoPath = oldBook.getCoverPath();
+
+
         setLogoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +77,7 @@ public class AddTitle extends AppCompatActivity {
                 newBook.setDays(Integer.parseInt(inputDays.getText().toString()));
                 newBook.setCoverPath(logoPath);
 
-                dbHandler.appendBook(newBook);
+                dbHandler.updateBook(currentBookId, newBook);
 
                 Intent toMainIntent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(toMainIntent);
