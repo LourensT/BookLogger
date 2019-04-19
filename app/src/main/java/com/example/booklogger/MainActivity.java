@@ -42,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+        mainListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                int dbid = position + 1;
+                return false;
+            }
+        });
 
         addBookButton = findViewById(R.id.addBook);
         addBookButton.setOnClickListener(

@@ -6,6 +6,7 @@ public class Book {
     private int pages = 420;
     private int days = 69;
     private int currentPage = 0;
+    private String coverPath = null;
 
     public Book() {
     }
@@ -15,6 +16,7 @@ public class Book {
         author = inputAuthor;
         pages = inputPages;
         days = inputDays;
+
     }
 
     public String getTitle() {
@@ -54,5 +56,13 @@ public class Book {
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public String getCoverPath() {
+        return coverPath;
+    }
+
+    public void setCoverPath(String coverPath) {
+        this.coverPath = coverPath;
     }
 }

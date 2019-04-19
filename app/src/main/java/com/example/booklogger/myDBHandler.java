@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class myDBHandler extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "books.db";
 
     public static final String TABLE_BOOKS = "BOOKS";
@@ -23,6 +23,7 @@ public class myDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_pages = "_pages";
     public static final String COLUMN_days = "_days";
     public static final String COLUMN_currentPage = "_currentPage";
+    public static final String COLUMN_coverPath  = "_coverPath";
 
     public static final String TABLE_PROGRESS = "PROGRESS";
     public static final String COLUMN_bookid = "_bookid";
@@ -44,7 +45,8 @@ public class myDBHandler extends SQLiteOpenHelper {
                 COLUMN_author + " TEXT, " +
                 COLUMN_pages + " REAL NOT NULL, " +
                 COLUMN_days + " REAL NOT NULL, " +
-                COLUMN_currentPage + " REAL NOT NULL " +
+                COLUMN_currentPage + " REAL NOT NULL, " +
+                COLUMN_coverPath + " TEXT " +
                 " );";
 
         db.execSQL(query_books);
@@ -82,6 +84,7 @@ public class myDBHandler extends SQLiteOpenHelper {
         bookValues.put(COLUMN_pages, book.getPages());
         bookValues.put(COLUMN_days, book.getDays());
         bookValues.put(COLUMN_currentPage, book.getCurrentPage());
+        bookValues.put(COLUMN_coverPath, book.getCoverPath());
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_BOOKS, null, bookValues);
         db.close();
