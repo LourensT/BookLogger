@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent editIntent = new Intent(view.getContext(), EditTitle.class);
                 editIntent.putExtra("ID", dbid);
                 startActivity(editIntent);
-                return false;
+                return true;
             }
         });
 

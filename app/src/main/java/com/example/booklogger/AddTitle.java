@@ -48,6 +48,8 @@ public class AddTitle extends AppCompatActivity {
         pagesPerPage = findViewById(R.id.pagesPerDay);
         submitButton = findViewById(R.id.addBookButton);
         setLogoButton = findViewById(R.id.addLogoButton);
+        //TODO PREVIEW The Chosen Cover somewhere
+
 
         inputDays.setOnClickListener(new View.OnClickListener() {
             @Override

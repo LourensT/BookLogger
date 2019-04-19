@@ -46,19 +46,18 @@ public class EditTitle extends AppCompatActivity {
         inputDays = findViewById(R.id.inputDays);
         submitButton = findViewById(R.id.addBookButton);
         setLogoButton = findViewById(R.id.addLogoButton);
-
+        //TODO PREVIEW The Chosen Cover somewhere
 
         Intent receivedIntent = getIntent();
         Bundle b = receivedIntent.getExtras();
         currentBookId = b.getInt("ID");
 
-        Book oldBook = dbHandler.getBook(currentBookId);
+        final Book oldBook = dbHandler.getBook(currentBookId);
         inputTitle.setText(oldBook.getTitle());
         inputAuthor.setText(oldBook.getAuthor());
         inputPages.setText(String.valueOf(oldBook.getPages()));
         inputDays.setText(String.valueOf(oldBook.getDays()));
         logoPath = oldBook.getCoverPath();
-
 
         setLogoButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -171,16 +171,12 @@ public class myDBHandler extends SQLiteOpenHelper {
         newEntry.put(COLUMN_title, newBook.getTitle());
         newEntry.put(COLUMN_author, newBook.getAuthor());
         newEntry.put(COLUMN_pages, newBook.getPages());
+        newEntry.put(COLUMN_coverPath, newBook.getCoverPath());
 
         SQLiteDatabase db = getWritableDatabase();
         db.update(TABLE_BOOKS, newEntry, COLUMN_ID + "=" + String.valueOf(bookId), null);
         db.close();
     }
-
-    public void updateCoverPath(int bookid, String newPath){
-        //TODO make update coverpath
-    }
-
 
 }
 
