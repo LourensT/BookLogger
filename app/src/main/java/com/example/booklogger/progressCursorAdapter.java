@@ -27,12 +27,6 @@ public class progressCursorAdapter extends CursorAdapter {
         String dateString = cursor.getString(cursor.getColumnIndex("_date"));
         int Pages = cursor.getInt(cursor.getColumnIndex("_page"));
 
-        if(dateString == null){
-            Log.i("DB", "null");
-        }
-        //Log.i("DB", dateString);
-        Log.i("DB", String.valueOf(Pages));
-
         itemDate.setText(dateString);
         itemPages.setText(String.valueOf(Pages));
 

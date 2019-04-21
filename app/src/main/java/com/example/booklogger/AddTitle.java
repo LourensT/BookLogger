@@ -98,7 +98,6 @@ public class AddTitle extends AppCompatActivity {
             Bitmap photo = (Bitmap) extra.get("data");
 
             logoPath = saveToInternalStorage(photo);
-            Log.i("DB", logoPath);
         }
 
     }

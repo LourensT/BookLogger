@@ -60,7 +60,7 @@ public class myDBHandler extends SQLiteOpenHelper {
         db.execSQL(query_progress);
 
         Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
-        Log.i("DB", "yo");
+        Log.i("DB", "Initiating New Database");
         if (c.moveToFirst()) {
             while ( !c.isAfterLast() ) {
                 Log.i("DB","Table Name=> "+c.getString(0));
@@ -175,6 +175,14 @@ public class myDBHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         db.update(TABLE_BOOKS, newEntry, COLUMN_ID + "=" + String.valueOf(bookId), null);
+        db.close();
+    }
+
+    public void deleteBook(int bookId){
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_BOOKS, COLUMN_ID + "=" + String.valueOf(bookId), null);
+        db.delete(TABLE_PROGRESS, COLUMN_bookid + "=" + String.valueOf(bookId), null);
         db.close();
     }
 

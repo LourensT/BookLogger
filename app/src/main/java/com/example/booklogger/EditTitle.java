@@ -29,6 +29,7 @@ public class EditTitle extends AppCompatActivity {
     private EditText inputDays;
     private Button submitButton;
     private Button setLogoButton;
+    private Button deleteBookButton;
     private com.example.sqltut.myDBHandler dbHandler;
     private final int REQUEST_IMAGE_CAPTURE = 1;
     private String logoPath = "Not Set";
@@ -37,7 +38,7 @@ public class EditTitle extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_title);
+        setContentView(R.layout.activity_edit_title);
 
         dbHandler = new myDBHandler(this, null, null, 1);
         inputTitle = findViewById(R.id.inputTitle);
@@ -46,6 +47,7 @@ public class EditTitle extends AppCompatActivity {
         inputDays = findViewById(R.id.inputDays);
         submitButton = findViewById(R.id.addBookButton);
         setLogoButton = findViewById(R.id.addLogoButton);
+        deleteBookButton = findViewById(R.id.deleteBookButton);
         //TODO PREVIEW The Chosen Cover somewhere
 
         Intent receivedIntent = getIntent();
@@ -58,6 +60,15 @@ public class EditTitle extends AppCompatActivity {
         inputPages.setText(String.valueOf(oldBook.getPages()));
         inputDays.setText(String.valueOf(oldBook.getDays()));
         logoPath = oldBook.getCoverPath();
+
+        deleteBookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbHandler.deleteBook(currentBookId);
+                Intent returnIntent = new Intent(v.getContext(), MainActivity.class);
+                startActivity(returnIntent);
+            }
+        });
 
         setLogoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +108,6 @@ public class EditTitle extends AppCompatActivity {
             Bitmap photo = (Bitmap) extra.get("data");
 
             logoPath = saveToInternalStorage(photo);
-            Log.i("DB", logoPath);
         }
 
     }

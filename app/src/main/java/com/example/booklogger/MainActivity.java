@@ -33,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        int dbid = position + 1;
+                        int bookId = (int) id;
 
                         Intent editBook = new Intent(view.getContext(), EditBook.class);
-                        editBook.putExtra("book", dbid);
+                        editBook.putExtra("book", bookId);
                         startActivity(editBook);
 
                     }
@@ -45,9 +45,10 @@ public class MainActivity extends AppCompatActivity {
         mainListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                int dbid = position + 1;
+                int bookId = (int) id;
+
                 Intent editIntent = new Intent(view.getContext(), EditTitle.class);
-                editIntent.putExtra("ID", dbid);
+                editIntent.putExtra("ID", bookId);
                 startActivity(editIntent);
                 return true;
             }

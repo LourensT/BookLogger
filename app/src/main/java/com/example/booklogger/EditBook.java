@@ -64,7 +64,6 @@ public class EditBook extends AppCompatActivity implements DatePickerFragment.da
 
         progressList = findViewById(R.id.progress);
         Cursor cursor = dbHandler.getProgressCursor(bookId);
-        Log.i("DB", String.valueOf(cursor.getCount()));
         progressCursorAdapter mainAdapter = new progressCursorAdapter(this, cursor, false);
         progressList.setAdapter(mainAdapter);
 
@@ -80,10 +79,8 @@ public class EditBook extends AppCompatActivity implements DatePickerFragment.da
                 else{
                     DialogFragment dateDialog = new DatePickerFragment();
                     int page = Integer.valueOf(enteredPage);
-                    Log.i("DB", "You");
                     ((DatePickerFragment) dateDialog).setValues(bookId, page);
                     dateDialog.show(getSupportFragmentManager(), "datePicker");
-                    Log.i("DB", "Two");
 
                 }
             }
@@ -92,7 +89,6 @@ public class EditBook extends AppCompatActivity implements DatePickerFragment.da
 
 
     public void onDateSelected(String date, int id, int page){
-        //TODO make this activy refresh on dateSet
         myDBHandler dbHandler = new myDBHandler(this, null, null, 1);
         dbHandler.addProgressString(id, date, page);
         finish();
